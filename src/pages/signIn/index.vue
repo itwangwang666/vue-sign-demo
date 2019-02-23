@@ -27,13 +27,28 @@ import axios from 'axios'
     methods: {
       signIn() {
           if(this.username.trim().length === 0 || this.password.trim().length === 0){
-              this.$message('请输入用户名或密码')
+               return this.$message('请输入用户名或密码')
           }
-        this.$http.post("http://litc.pro:9999/v1/users/login",{
+          //发送post请求
+        this.$http.post("/users/login",{
           username:this.username,
           password:this.password
         }).then(result=>{
-          console.log(result);
+          console.log(result)
+          this.$message({
+            type:"success",
+            message:result.data.succMsg
+          })
+          localStorage.setItem('token',result.data.data.token)
+          localStorage.setItem('userInfo',JSON.stringify(result.data.data))
+          this.$router.push('/home')
+
+        }).catch(error=>{
+          console.dir(error)
+          this.$message({
+            type:"error",
+            message:error.response.data.errMsg
+          })
         })
       }
     }

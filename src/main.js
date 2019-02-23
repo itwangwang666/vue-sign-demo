@@ -14,6 +14,14 @@ import './styles/common.css'
 import axios from 'axios'
 Vue.prototype.$http = axios
 
+//axios全局配置baseURL
+axios.defaults.baseURL = 'http://litc.pro:9999/v1';
+
+//注册全局前置守卫
+router.beforeEach((to, from, next) => {
+  console.log(to,from);
+})
+
 Vue.config.productionTip = false
 
 new Vue({
