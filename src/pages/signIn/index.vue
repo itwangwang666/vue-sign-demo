@@ -6,12 +6,14 @@
         <el-input v-model="username"></el-input>
       </el-form-item>
       <el-form-item label="密码">
-        <el-input v-model="password"></el-input>
+        <el-input v-model="password" @keyup.native.enter="signIn"></el-input>
       </el-form-item>
       
       <el-form-item>
         <el-button type="primary" @click="signIn">登录</el-button>
+        <router-link to="/signUp" class="signUp">没有账号?注册一个</router-link>
       </el-form-item>
+      
     </el-form>
   </div>
 </template>
@@ -37,10 +39,10 @@ import axios from 'axios'
           console.log(result)
           this.$message({
             type:"success",
-            message:result.data.succMsg
+            message:result.succMsg
           })
-          localStorage.setItem('token',result.data.data.token)
-          localStorage.setItem('userInfo',JSON.stringify(result.data.data))
+          localStorage.setItem('token',result.data.token)
+          localStorage.setItem('userInfo',JSON.stringify(result.data))
           this.$router.push('/home')
 
         }).catch(error=>{
@@ -67,5 +69,9 @@ import axios from 'axios'
     .el-button{
         margin-right: 80px;
     }
+    .signUp{
+          text-decoration: none;
+          color:#0094ff;
+        }
 }
 </style>

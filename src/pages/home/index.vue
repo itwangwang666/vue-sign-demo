@@ -34,8 +34,8 @@
       </el-col>
       <el-col :span="20">
         <div class="loginOut">
-          <span>昵称:</span>
-          <el-button type="danger">退出登录</el-button>
+          <span>昵称:{{userInfo.nickname}}</span>
+          <el-button type="danger" @click="signUp">退出登录</el-button>
         </div>
         <router-view></router-view>
       </el-col>
@@ -44,6 +44,11 @@
 </template>
 <script>
 export default {
+  data(){
+    return {
+      userInfo : JSON.parse(localStorage.getItem('userInfo') || '{}')
+    }
+  },
   methods: {
     handleOpen(key, keyPath) {
       // console.log(key, keyPath);
@@ -62,6 +67,15 @@ export default {
           this.$router.push("/home/wuhanTable");
           break;
       }
+    },
+    signUp(){
+      localStorage.removeItem('token')
+      localStorage.removeItem('userInfo')
+      this.$router.push('/')
+      this.$message({
+        type:'success',
+        message:'退出成功'
+      })
     }
   }
 };
@@ -71,5 +85,9 @@ export default {
   display: flex;
   align-items: center;
   margin-left:30px;
+  margin-top:10px;
+  span{
+    margin-right: 20px;
+  }
 }
 </style>
