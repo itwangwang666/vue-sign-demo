@@ -33,32 +33,43 @@
         </el-menu>
       </el-col>
       <el-col :span="20">
-          <router-view></router-view>
+        <div class="loginOut">
+          <span>昵称:</span>
+          <el-button type="danger">退出登录</el-button>
+        </div>
+        <router-view></router-view>
       </el-col>
     </el-row>
   </div>
 </template>
 <script>
-  export default {
-    methods: {
-      handleOpen(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        // console.log(key, keyPath);
-      },
-      handleSelect(key,keyPath){
-        // console.log(key, keyPath)
-        switch (key) {
-            case "1-1":
-                this.$router.push('/home/table')
-                break;
-        
-            case "1-2":
-                this.$router.push('/home/wuhanTable')
-                break;
-        }
+export default {
+  methods: {
+    handleOpen(key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      // console.log(key, keyPath);
+    },
+    handleSelect(key, keyPath) {
+      // console.log(key, keyPath)
+      switch (key) {
+        case "1-1":
+          this.$router.push("/home/table");
+          break;
+
+        case "1-2":
+          this.$router.push("/home/wuhanTable");
+          break;
       }
     }
   }
+};
 </script>
+<style lang="less" scoped>
+.loginOut{
+  display: flex;
+  align-items: center;
+  margin-left:30px;
+}
+</style>

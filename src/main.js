@@ -19,7 +19,18 @@ axios.defaults.baseURL = 'http://litc.pro:9999/v1';
 
 //注册全局前置守卫
 router.beforeEach((to, from, next) => {
-  console.log(to,from);
+  // console.log(to,from);
+  let token = localStorage.getItem('token') || ''
+
+  if (token && to.path === '/signIn'){
+    return next('/home')
+  }
+
+  if (token || to.path === '/signIn'){
+    next()
+  }else{
+    next('/')
+  }
 })
 
 Vue.config.productionTip = false

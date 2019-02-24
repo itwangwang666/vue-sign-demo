@@ -12,6 +12,7 @@ export default new Router({
     { path: '/signIn', component: signInComponent },
     { path: '/home',
     component: homeComponent ,
+      redirect: '/home/table',
     children:[
       { path: 'table',
         component: tableComponent
